@@ -2,6 +2,7 @@ package org.smartcity.smartcity;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.sql.ResultSet;
@@ -13,6 +14,8 @@ public class LoginController {
     private PasswordField psw;
     @FXML
     private TextField email;
+    @FXML
+    private Label CNV;
 
     public void Submit (ActionEvent e) throws SQLException {
         DbManager Db = new DbManager();
@@ -24,7 +27,7 @@ public class LoginController {
             System.out.println("C'è qualcosa");
         }
         else {
-            System.out.println("Non c'è niente");
+            CNV.setOpacity(1.0);
         }
 
     }
