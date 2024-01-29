@@ -12,21 +12,19 @@ public class Main extends Application {
 
     private static Stage primaryStage;
 
-    public static Stage getPrimaryStage() {
+    public static Stage getPrimaryStage() { //Funzione che ritorna il main stage
         return primaryStage;
     }
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage; //Salva lo Stage principale
-        LoadFirstScene(stage, "Login", "login.fxml", 500, 500);
-    }
 
-    private void LoadFirstScene(Stage stage, String Title, String Surce, int W, int H) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(Surce));
-        Scene scene = new Scene(fxmlLoader.load(), W, H);
-        stage.setTitle(Title);
-        stage.setScene(scene);
-        stage.show();
+        Controller FirstScene = new Controller();
+
+        FirstScene.SwapScene("Login", "login.fxml", 500, 500);
+        
+        primaryStage.show();
+
     }
 
     public static void main(String[] args) {

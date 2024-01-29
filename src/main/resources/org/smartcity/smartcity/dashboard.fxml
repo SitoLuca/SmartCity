@@ -12,21 +12,21 @@
 
 <AnchorPane prefHeight="447.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.smartcity.smartcity.DashboardController">
    <children>
-      <TableView layoutX="40.0" layoutY="103.0" prefHeight="265.0" prefWidth="532.0">
+      <TableView fx:id="Table" layoutX="40.0" layoutY="103.0" prefHeight="265.0" prefWidth="532.0">
         <columns>
-          <TableColumn prefWidth="120.0" text="Nome Sensore" />
-          <TableColumn prefWidth="145.0" text="Posizione" />
-            <TableColumn prefWidth="160.0" text="Ultimo Aggiornamento" />
-            <TableColumn minWidth="0.0" prefWidth="106.0" text="Status" />
+          <TableColumn fx:id="Nome" prefWidth="120.0" text="Nome Sensore" />
+          <TableColumn fx:id="Posizione" prefWidth="145.0" text="Posizione" />
+            <TableColumn fx:id="LastUpdate" prefWidth="160.0" text="Ultimo Aggiornamento" />
+            <TableColumn fx:id="Status" minWidth="0.0" prefWidth="106.0" text="Status" />
         </columns>
       </TableView>
       <HBox layoutX="107.0" layoutY="62.0" prefHeight="25.0" prefWidth="387.0">
          <children>
-            <TextField />
+            <TextField fx:id="inquinamentoSoglia" />
             <Separator prefHeight="0.0" prefWidth="44.0" style="-fx-opacity: 0;" />
-            <TextField />
+            <TextField fx:id="tempSoglia" />
             <Separator prefHeight="0.0" prefWidth="44.0" style="-fx-opacity: 0;" />
-            <TextField />
+            <TextField fx:id="Nveicoli" />
          </children>
       </HBox>
       <Label layoutX="121.0" layoutY="45.0" text="Inquinamento" />
@@ -37,6 +37,9 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Button layoutX="226.0" layoutY="374.0" mnemonicParsing="false" text="Aggiungi Nuovo Sensore" />
+      <Button layoutX="496.0" layoutY="376.0" mnemonicParsing="false" text="Aggiungi" />
+      <Button layoutX="506.0" layoutY="62.0" mnemonicParsing="false" text="Salva" />
+      <TextField fx:id="newnome" layoutX="40.0" layoutY="376.0" prefHeight="25.0" prefWidth="199.0" promptText="Nome" />
+      <TextField fx:id="newposizione" layoutX="266.0" layoutY="376.0" prefHeight="25.0" prefWidth="199.0" promptText="Posizione" />
    </children>
 </AnchorPane>

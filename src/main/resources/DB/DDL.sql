@@ -12,7 +12,8 @@ create table sensore
 (
 
     id        integer primary key autoincrement,
-    locazione varchar(128) not null
+    locazione varchar(128) not null,
+    Nome varchar(64) not null
 
 
 );
