@@ -14,10 +14,8 @@
    <children>
       <TableView fx:id="Table" layoutX="40.0" layoutY="103.0" prefHeight="265.0" prefWidth="532.0">
         <columns>
-          <TableColumn fx:id="Nome" prefWidth="120.0" text="Nome Sensore" />
-          <TableColumn fx:id="Posizione" prefWidth="145.0" text="Posizione" />
-            <TableColumn fx:id="LastUpdate" prefWidth="160.0" text="Ultimo Aggiornamento" />
-            <TableColumn fx:id="Status" minWidth="0.0" prefWidth="106.0" text="Status" />
+          <TableColumn fx:id="Nome" prefWidth="272.0" text="Nome Sensore" />
+          <TableColumn fx:id="Posizione" prefWidth="259.0" text="Posizione" />
         </columns>
       </TableView>
       <HBox layoutX="107.0" layoutY="62.0" prefHeight="25.0" prefWidth="387.0">
@@ -29,17 +27,18 @@
             <TextField fx:id="Nveicoli" />
          </children>
       </HBox>
-      <Label layoutX="121.0" layoutY="45.0" text="Inquinamento" />
-      <Label layoutX="266.0" layoutY="45.0" text="Temperatura" />
-      <Label layoutX="409.0" layoutY="45.0" text="N veicoli" />
+      <Label layoutX="126.0" layoutY="45.0" text="Inquinamento" />
+      <Label layoutX="267.0" layoutY="45.0" text="Temperatura" />
+      <Label layoutX="412.0" layoutY="45.0" text="N veicoli" />
       <Label layoutX="201.0" layoutY="7.0" text="Soglie Di Guardia">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
       <Button layoutX="496.0" layoutY="376.0" mnemonicParsing="false" text="Aggiungi" />
-      <Button layoutX="506.0" layoutY="62.0" mnemonicParsing="false" text="Salva" />
-      <TextField fx:id="newnome" layoutX="40.0" layoutY="376.0" prefHeight="25.0" prefWidth="199.0" promptText="Nome" />
-      <TextField fx:id="newposizione" layoutX="266.0" layoutY="376.0" prefHeight="25.0" prefWidth="199.0" promptText="Posizione" />
+      <Button fx:id="salvaSoglie" layoutX="506.0" layoutY="62.0" mnemonicParsing="false" text="Salva" />
+      <TextField fx:id="newnome" layoutX="59.0" layoutY="376.0" prefHeight="25.0" prefWidth="199.0" promptText="Nome" />
+      <TextField fx:id="newposizione" layoutX="280.0" layoutY="376.0" prefHeight="25.0" prefWidth="199.0" promptText="Posizione" />
+      <Label fx:id="SoglieAggiornate" layoutX="21.0" layoutY="66.0" style="-fx-font-weight: bold; -fx-opacity: 0;" text="Soglie Salvate!" textFill="#5ab965" />
    </children>
 </AnchorPane>

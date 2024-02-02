@@ -15,7 +15,7 @@ public class DbManager {
     private Connection conn;
 
     private boolean connect() throws SQLException {
-        String path = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\DB\\SmartCityDb.sqlite"; //Database file Path
+        String path = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\DB\\SmartCityDb.sqlite"; //Database file Path, specificando i driver
         try {
 
             conn = DriverManager.getConnection(path); //Connect
