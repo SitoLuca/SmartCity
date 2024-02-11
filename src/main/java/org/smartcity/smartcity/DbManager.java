@@ -4,15 +4,16 @@ import java.sql.*;
 
 
 /*
-* Classe che gestisce le interazioni con il DB sqlite (src/main/resources/DB/SmartCityDb.sqlite)
-* Driver: src/main/resources/DB/sqlite-jdbc-3.40.0.0.jar
-* DDL: src/main/resources/DB/DDL.sql
-*
-* */
+ * Classe che gestisce le interazioni con il DB sqlite (src/main/resources/DB/SmartCityDb.sqlite)
+ * Driver: src/main/resources/DB/sqlite-jdbc-3.40.0.0.jar
+ * DDL: src/main/resources/DB/DDL.sql
+ *
+ * */
 
 public class DbManager {
 
-    private Connection conn;
+    private static Connection conn;
+
 
     private boolean connect() throws SQLException {
         String path = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\DB\\SmartCityDb.sqlite"; //Database file Path, specificando i driver
@@ -36,9 +37,9 @@ public class DbManager {
             System.out.println(connect() ? "Connected" : "Not Connected"); //Apro la connessione
 
             Statement stm = conn.createStatement(); //Defisco uno stetement
-            ResultSet res = stm.executeQuery(SQL); //Eseguo lo statement
+            ResultSet res = stm.executeQuery(SQL);
 
-            conn.close(); //Chiudo la connessione
+            //conn.close();
 
             return res;
 
@@ -48,6 +49,22 @@ public class DbManager {
         }
 
 
+    }
+
+    public void insertExec(String SQL) throws SQLException {
+        try {
+
+            conn = null;
+            System.out.println(connect() ? "Connected" : "Not Connected"); //Apro la connessione
+
+            Statement stm2 = conn.createStatement(); //Defisco uno stetement
+            stm2.executeQuery(SQL);
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage()); //Mostra errore
+            throw e;
+        }
     }
 
 }
