@@ -12,20 +12,17 @@ import java.sql.*;
 
 public class DbManager {
 
-    private static Connection conn;
-
-
-    private boolean connect() throws SQLException {
+    private Connection connect() throws SQLException {
         String path = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\DB\\SmartCityDb.sqlite"; //Database file Path, specificando i driver
         try {
 
-            conn = DriverManager.getConnection(path); //Connect
-            conn.setAutoCommit(true); //Enable Auto Commit
-            return true; //Connection Done
+            Connection conn = DriverManager.getConnection(path); //Connect
+            conn.setAutoCommit(true);
+            return conn; //Connection Done
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return false; //Connection failed
+            return null; //Connection failed
         }
 
 
@@ -34,11 +31,17 @@ public class DbManager {
     public ResultSet queryExec(String SQL) throws SQLException {
         try {
 
-            System.out.println(connect() ? "Connected" : "Not Connected"); //Apro la connessione
+            Connection conn = connect();
 
+            if (conn == null) {
+                System.out.println("Impossibile Connettersi al DB");
+            }
+
+            assert conn != null;
             Statement stm = conn.createStatement(); //Defisco uno stetement
             ResultSet res = stm.executeQuery(SQL);
 
+            //stm.close();
             //conn.close();
 
             return res;
@@ -51,15 +54,20 @@ public class DbManager {
 
     }
 
-    public void insertExec(String SQL) throws SQLException {
+    public void insertSensor(String nome, String posizione) throws SQLException {
         try {
 
-            conn = null;
-            System.out.println(connect() ? "Connected" : "Not Connected"); //Apro la connessione
+            Connection conn = connect();
+            if (conn == null) {
+                System.out.println("Impossibile Connettersi al DB");
+            }
+            PreparedStatement ps = conn.prepareStatement("Insert into sensore (nome,locazione) values (?,?);"); //Preparo lo statement
 
-            Statement stm2 = conn.createStatement(); //Defisco uno stetement
-            stm2.executeQuery(SQL);
+            ps.setString(1, nome);
+            ps.setString(2, posizione);
+            ps.executeUpdate();
 
+            conn.close();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage()); //Mostra errore

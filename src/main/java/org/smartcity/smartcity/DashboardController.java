@@ -73,12 +73,10 @@ public class DashboardController extends Controller {
                 String Posizione = newposizione.getText();
 
                 DbManager db = new DbManager();
-                String sql = "Insert into sensore (nome,locazione) values ('" + Nome + "','" + Posizione + "');";
-                System.out.println(sql);
 
                 try {
 
-                    db.insertExec(sql);
+                    db.insertSensor(Nome,Posizione);
 
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -109,7 +107,7 @@ public class DashboardController extends Controller {
         //System.out.println(AllSensors.getString("Nome"));
 
         while (AllSensors.next()) {
-            String Line = "Sensore: " + AllSensors.getString("nome") + " Locazione: " + AllSensors.getString("locazione");
+            String Line = "Sensore: " + AllSensors.getString("Nome") + " Locazione: " + AllSensors.getString("locazione");
 
             Sensors.getItems().add(Line);
         }
