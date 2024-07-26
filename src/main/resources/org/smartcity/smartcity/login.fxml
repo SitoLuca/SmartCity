@@ -38,7 +38,7 @@
             <Label fx:id="CNV" style="-fx-background-color: red; -fx-border-radius: 2px; -fx-padding: 5px; -fx-font-weight: bold; -fx-opacity: 0;" text="Credenziali Non Valide" textFill="WHITE" />
             <Label text="Email" />
             <TextField fx:id="email" />
-            <Label  style="-fx-opacity: 0;" text="Spacer">
+            <Label style="-fx-opacity: 0;" text="Spacer">
                <font>
                   <Font size="30.0" />
                </font>
@@ -50,7 +50,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </VBox>
-      <Button id="submitButton" alignment="CENTER" layoutX="215.0" layoutY="379.0" mnemonicParsing="false" onAction="#Submit" stylesheets="@../../../Style/Button.css" text="Submit" textFill="WHITE" />
+      <Button id="submitButton" alignment="CENTER" layoutX="215.0" layoutY="379.0" mnemonicParsing="false" onAction="#Submit" stylesheets="@../../../Style/Button.css" text="Entra" textFill="WHITE" />
       <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="310.0" layoutY="81.0">
          <image>
             <Image url="@../../../img/Logo.jpg" />
