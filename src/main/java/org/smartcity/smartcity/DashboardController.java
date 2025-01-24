@@ -1,16 +1,15 @@
 package org.smartcity.smartcity;
 
-import javafx.beans.Observable;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 
@@ -35,6 +34,12 @@ public class DashboardController extends Controller {
     private Button salvaSoglie;
     @FXML
     private Label SoglieAggiornate;
+    @FXML
+    private DatePicker da;
+    @FXML
+    private DatePicker a;
+    @FXML
+    private Button creaGrafico;
 
     public DashboardController() throws SQLException {
 
@@ -51,20 +56,21 @@ public class DashboardController extends Controller {
                 String nuovaSogliaTemp = tempSoglia.getText();
                 String nuovaSogliaNveicoli = Nveicoli.getText();
 
-                String Final_line = nuovaSogliaInquinamento + "," + nuovaSogliaTemp + "," + nuovaSogliaNveicoli;
+                DbManager db = new DbManager();
 
                 try {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + "\\src\\main\\resources\\SoglieDiGuardia.dat"));
-                    writer.write(Final_line);
-                    writer.close();
-                    SoglieAggiornate.setOpacity(1.0);
-                } catch (IOException e) {
+
+                    String sql = "insert into soglieDiGuardia (sogliaInquinamento, sogliaTemperatura, sogliaN_veicoli) values (" + nuovaSogliaInquinamento + ", " + nuovaSogliaTemp + ","+ nuovaSogliaNveicoli +")";
+                    db.insert(sql);
+
+                    SoglieAggiornate.setOpacity(1);
+
+                } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-
-
             }
         });
+
         SalvaSensore.setOnAction(new EventHandler<ActionEvent>() { //Quando viene cliccato il bottone "Aggiungi"
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -76,7 +82,7 @@ public class DashboardController extends Controller {
 
                 try {
 
-                    db.insertSensor(Nome,Posizione);
+                    db.insert(Nome);
 
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -93,6 +99,13 @@ public class DashboardController extends Controller {
             }
         });
 
+        creaGrafico.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                //Fai il grafico
+            }
+        });
+
         setsoglie();
 
         putSensors();
@@ -103,11 +116,12 @@ public class DashboardController extends Controller {
     private void putSensors() throws SQLException {
 
         DbManager DB = new DbManager();
-        ResultSet AllSensors = DB.queryExec("Select * from sensore");
+        List<Map<String, Object>> AllSensors = DB.queryExec("Select * from sensore");
         //System.out.println(AllSensors.getString("Nome"));
 
-        while (AllSensors.next()) {
-            String Line = "Sensore: " + AllSensors.getString("Nome") + " Locazione: " + AllSensors.getString("locazione");
+        for (Map<String, Object> allSensor : AllSensors) {
+
+            String Line = "Sensore: " + allSensor.get("Nome") + " Locazione: " + allSensor.get("locazione");
 
             Sensors.getItems().add(Line);
         }
@@ -115,16 +129,15 @@ public class DashboardController extends Controller {
 
     }
 
-    private void setsoglie() throws FileNotFoundException {
-        File soglie = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\SoglieDiGuardia.dat"); //Leggo il File che contiene le soglie di Guardia
-        Scanner reader = new Scanner(soglie); //Definisco il reader del file
+    private void setsoglie() throws SQLException {
 
-        String values = reader.nextLine(); //Leggo la prima riga del file
-        String[] singleValues = values.split(","); //Divido i tre valori
+        DbManager db = new DbManager();
 
-        inquinamentoSoglia.setText(singleValues[0]); //Assegno i valori
-        tempSoglia.setText(singleValues[1]);
-        Nveicoli.setText(singleValues[2]);
+        List<Map<String, Object>> soglie = db.queryExec("select * from soglieDiGuardia where data_ora  = (select max(data_ora) from soglieDiGuardia)");
+
+        inquinamentoSoglia.setText(soglie.getFirst().get("sogliaInquinamento").toString()); //Assegno i valori
+        tempSoglia.setText(soglie.getFirst().get("sogliaTemperatura").toString());
+        Nveicoli.setText(soglie.getFirst().get("sogliaN_veicoli").toString());
     }
 
 

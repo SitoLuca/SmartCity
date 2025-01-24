@@ -1,0 +1,118 @@
+/* CSS per una TextField carina in JavaFX */
+
+#Title{
+    -fx-text-fill: #4CAF50; /* Colore del testo verde */
+    -fx-font-size: 30px; /* Dimensione del testo */
+    -fx-font-family: "Arial", sans-serif; /* Font */
+    -fx-font-weight: bold; /* Grassetto */
+    -fx-padding: 5px; /* Padding interno */
+}
+
+.text-field {
+    -fx-background-color: #ffffff; /* Sfondo bianco */
+    -fx-border-radius: 10; /* Angoli arrotondati */
+    -fx-border-width: 2; /* Larghezza del bordo */
+    -fx-border-color: #4CAF50; /* Colore del bordo verde */
+    -fx-padding: 3px; /* Padding interno */
+    -fx-font-size: 13px; /* Dimensione del testo */
+    -fx-font-family: "Arial", sans-serif; /* Font */
+    -fx-text-fill: #333333; /* Colore del testo */
+    -fx-focus-color: #4CAF50; /* Colore di focus verde */
+    -fx-hover-border-color: #81C784; /* Colore del bordo al passaggio del mouse */
+    -fx-background-insets: 0, 1; /* Insetto di sfondo per l'effetto di profondità */
+}
+
+.text-field:focused {
+    -fx-border-color: #66bb6a; /* Colore più chiaro quando è selezionata */
+}
+
+.text-field:hover {
+    -fx-border-color: #81C784; /* Colore del bordo al passaggio del mouse */
+}
+
+/* CSS per una Label carina in JavaFX */
+.label {
+    -fx-text-fill: #4CAF50; /* Colore del testo verde */
+    -fx-font-size: 18px; /* Dimensione del testo */
+    -fx-font-family: "Arial", sans-serif; /* Font */
+    -fx-font-weight: bold; /* Grassetto */
+    -fx-padding: 5px; /* Padding interno */
+}
+
+/* CSS per un Button carino in JavaFX */
+.button {
+    -fx-background-color: #4CAF50; /* Colore di sfondo verde */
+    -fx-text-fill: white; /* Colore del testo bianco */
+    -fx-font-size: 16px; /* Dimensione del testo */
+    -fx-font-family: "Arial", sans-serif; /* Font */
+    -fx-padding: 10px 20px; /* Padding per il bottone */
+    -fx-background-radius: 8; /* Angoli arrotondati */
+    -fx-border-width: 0; /* Nessun bordo visibile */
+    -fx-cursor: hand; /* Cambia il cursore a mano */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 1, 1); /* Effetto ombra */
+}
+
+.button:hover {
+    -fx-background-color: #66bb6a; /* Colore più chiaro al passaggio del mouse */
+}
+
+.button:pressed {
+    -fx-background-color: #388e3c; /* Colore ancora più scuro quando premuto */
+    -fx-effect: none; /* Rimuove l'effetto ombra quando il bottone è premuto */
+}
+
+/* Stile generale della ListView */
+.list-view {
+    -fx-background-color: #f9f9f9; /* Sfondo chiaro per la lista */
+    -fx-border-color: #dddddd; /* Bordo grigio chiaro */
+    -fx-border-width: 1px; /* Spessore del bordo */
+    -fx-border-radius: 8px; /* Angoli arrotondati */
+    -fx-padding: 5px; /* Spaziatura interna */
+    -fx-cell-size: 40px; /* Altezza delle celle */
+}
+
+/* Stile delle celle all'interno della ListView */
+.list-cell {
+    -fx-background-color: #ffffff; /* Sfondo delle celle */
+    -fx-text-fill: #333333; /* Colore del testo */
+    -fx-font-size: 14px; /* Dimensione del testo */
+    -fx-font-family: "Arial", sans-serif; /* Font delle celle */
+    -fx-padding: 5px 10px; /* Padding interno delle celle */
+    -fx-border-color: transparent; /* Nessun bordo di default */
+    -fx-border-width: 0 0 1px 0; /* Separatore sottile tra le celle */
+    -fx-border-style: solid; /* Linea per il bordo */
+    -fx-border-color: #eeeeee; /* Colore del separatore */
+}
+
+/* Effetto al passaggio del mouse */
+.list-cell:hover {
+    -fx-background-color: #f0f0f0; /* Sfondo grigio chiaro */
+}
+
+/* Stile per la cella selezionata */
+.list-cell:selected {
+    -fx-background-color: #e0e0e0; /* Sfondo grigio più scuro */
+    -fx-text-fill: #000000; /* Colore del testo in selezione */
+    -fx-font-weight: bold; /* Testo in grassetto */
+}
+
+/* Rimuove le barre di scorrimento visibili per uno stile più pulito */
+.scroll-bar {
+    -fx-opacity: 0;
+}
+
+/* Ripristina l'opacità della barra di scorrimento al passaggio del mouse */
+.scroll-bar:hover {
+    -fx-opacity: 1;
+}
+
+/* Personalizza la barra di scorrimento per uno stile più moderno */
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #cccccc; /* Colore della thumb */
+    -fx-background-radius: 4px; /* Angoli arrotondati */
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: #f0f0f0; /* Sfondo della barra */
+    -fx-background-radius: 4px; /* Angoli arrotondati */
+}
