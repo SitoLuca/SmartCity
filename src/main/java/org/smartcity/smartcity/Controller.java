@@ -1,21 +1,20 @@
 package org.smartcity.smartcity;
 
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 
 public class Controller {
 
-    public void SwapScene(String title, String Surce, int W, int H) {
+    public void SwapScene(String title, String Surce, int W, int H, boolean resizable) {
         try {
 
-            Stage primaryStage = Main.getPrimaryStage(); //Recupera lo Stage
+            Stage primaryStage = Main.getPrimaryStage();
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(Surce));
             Scene next = new Scene(fxmlLoader.load(), W, H);
+            primaryStage.setResizable(resizable);
             primaryStage.setTitle(title);
             primaryStage.setScene(next);
 

@@ -26,12 +26,12 @@ public class LoginController extends Controller {
     private Label CNV;
 
     public void Submit(ActionEvent e) throws SQLException, IOException { //Event Listener click pulsante Submit
-        DbManager Db = new DbManager();
+        DbManager Db = DbManager.getInstance();;
 
         List<Map<String, Object>> res = Db.queryExec("Select * from user where email = '" + email.getText() + "' and password = '" + psw.getText() + "'"); //Costruisce la query in base all' input
 
         if (!res.isEmpty()) { //Se non è vuota
-            super.SwapScene("Dashboard", "dashboard.fxml", 600, 600); //Passa alla dashboard
+            super.SwapScene("Dashboard", "dashboard.fxml", 600, 600, false); //Passa alla dashboard
 
         } else {
             CNV.setOpacity(1.0); //Altrimenti mostra il messaggio di errore

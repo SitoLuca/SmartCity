@@ -1,10 +1,7 @@
 package org.smartcity.smartcity;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -15,6 +12,18 @@ import java.util.Map;
 
 public class DbManager {
 
+    private static DbManager instance = null;
+
+    private DbManager() {
+    }
+
+    public static DbManager getInstance() {
+        /*
+        Semplificazione di
+        if (instance == null) {return new DbManager; } else { return instance; }
+        */
+        return Objects.requireNonNullElseGet(instance, DbManager::new);
+    }
 
     private Connection connect() throws SQLException {
         String path = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\DB\\SmartCityDb.sqlite"; //Database file Path, specificando i driver

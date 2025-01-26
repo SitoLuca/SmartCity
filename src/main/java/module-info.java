@@ -11,6 +11,7 @@ module org.smartcity.smartcity {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires annotations;
 
     opens org.smartcity.smartcity to javafx.fxml;
     exports org.smartcity.smartcity;

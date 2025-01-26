@@ -11,13 +11,14 @@ public class Main extends Application {
     public static Stage getPrimaryStage() { //Funzione che ritorna il main stage
         return primaryStage;
     }
+
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage; //Salva lo Stage principale
 
         Controller FirstScene = new Controller();
 
-        FirstScene.SwapScene("Login", "login.fxml", 500, 500);
+        FirstScene.SwapScene("Login", "login.fxml", 500, 500, false);
         
         primaryStage.show();
 

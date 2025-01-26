@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,37 +11,37 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="693.0" prefWidth="602.0" style="-fx-background-color: E3F6FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.smartcity.smartcity.DashboardController">
+<AnchorPane prefHeight="693.0" prefWidth="610.0" style="-fx-background-color: E3F6FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.smartcity.smartcity.DashboardController">
    <children>
       <ImageView fitHeight="345.0" fitWidth="601.0" layoutX="1.0" layoutY="216.0" AnchorPane.bottomAnchor="0.0">
          <image>
             <Image url="@../../../img/dashboarSkyline.jpeg" />
          </image>
       </ImageView>
-      <ListView fx:id="Sensors" layoutX="151.0" layoutY="144.0" prefHeight="270.0" prefWidth="299.0" stylesheets="@../../../Style/textbox.css" />
       <HBox layoutX="105.0" layoutY="110.0" prefHeight="25.0" prefWidth="387.0">
          <children>
-            <TextField fx:id="inquinamentoSoglia" stylesheets="@../../../Style/textbox.css" />
+            <TextField fx:id="inquinamentoSoglia" stylesheets="@../../../Style/dashboard.css" />
             <Separator prefHeight="0.0" prefWidth="44.0" style="-fx-opacity: 0;" />
-            <TextField fx:id="tempSoglia" stylesheets="@../../../Style/textbox.css" />
+            <TextField fx:id="tempSoglia" stylesheets="@../../../Style/dashboard.css" />
             <Separator prefHeight="0.0" prefWidth="44.0" style="-fx-opacity: 0;" />
-            <TextField fx:id="Nveicoli" stylesheets="@../../../Style/textbox.css" />
+            <TextField fx:id="Nveicoli" stylesheets="@../../../Style/dashboard.css" />
          </children>
       </HBox>
-      <Label layoutX="105.0" layoutY="76.0" stylesheets="@../../../Style/textbox.css" text="Inquinamento" />
-      <Label layoutX="242.0" layoutY="76.0" stylesheets="@../../../Style/textbox.css" text="Temperatura" />
-      <Label layoutX="391.0" layoutY="76.0" stylesheets="@../../../Style/textbox.css" text="N veicoli" />
-      <Label id="Title" layoutX="170.0" layoutY="14.0" stylesheets="@../../../Style/textbox.css" text="Soglie Di Guardia">
+      <Label layoutX="105.0" layoutY="76.0" stylesheets="@../../../Style/dashboard.css" text="Inquinamento" />
+      <Label layoutX="242.0" layoutY="76.0" stylesheets="@../../../Style/dashboard.css" text="Temperatura" />
+      <Label layoutX="391.0" layoutY="76.0" stylesheets="@../../../Style/dashboard.css" text="N veicoli" />
+      <Label id="Title" layoutX="170.0" layoutY="14.0" stylesheets="@../../../Style/dashboard.css" text="Soglie Di Guardia">
          <font>
             <Font size="43.0" />
          </font>
       </Label>
-      <Button fx:id="SalvaSensore" layoutX="23.0" layoutY="307.0" mnemonicParsing="false" stylesheets="@../../../Style/textbox.css" text="Aggiungi" />
-      <Button fx:id="salvaSoglie" layoutX="507.0" layoutY="103.0" mnemonicParsing="false" stylesheets="@../../../Style/textbox.css" text="Salva" />
-      <TextField fx:id="newnome" layoutX="23.0" layoutY="217.0" prefHeight="25.0" prefWidth="102.0" promptText="Nome" stylesheets="@../../../Style/textbox.css" />
-      <TextField fx:id="newposizione" layoutX="23.0" layoutY="256.0" prefHeight="25.0" prefWidth="102.0" promptText="Posizione" stylesheets="@../../../Style/textbox.css" />
+      <Button fx:id="SalvaSensore" layoutX="23.0" layoutY="307.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Aggiungi" />
+      <Button fx:id="salvaSoglie" layoutX="507.0" layoutY="103.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Salva" />
+      <TextField fx:id="newnome" layoutX="23.0" layoutY="217.0" prefHeight="25.0" prefWidth="102.0" promptText="Nome" stylesheets="@../../../Style/dashboard.css" />
+      <TextField fx:id="newposizione" layoutX="23.0" layoutY="256.0" prefHeight="25.0" prefWidth="102.0" promptText="Posizione" stylesheets="@../../../Style/dashboard.css" />
       <Label fx:id="SoglieAggiornate" layoutX="8.0" layoutY="114.0" style="-fx-font-weight: bold; -fx-opacity: 0;" text="Soglie Salvate!" textFill="#5ab965" />
-      <Button fx:id="creaGrafico" layoutX="457.0" layoutY="197.0" mnemonicParsing="false" stylesheets="@../../../Style/textbox.css" text="Crea Grafico" />
-      <Label layoutX="8.0" layoutY="172.0" stylesheets="@../../../Style/textbox.css" text="Nuovo Sensore" />
+      <Button fx:id="creaGrafico" layoutX="457.0" layoutY="197.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Crea Grafico" />
+      <Label layoutX="-5.0" layoutY="182.0" stylesheets="@../../../Style/dashboard.css" text="Nuova Centralina" />
+      <TableView fx:id="MatrixSensor" layoutX="152.0" layoutY="148.0" prefHeight="267.0" prefWidth="299.0" />
    </children>
 </AnchorPane>

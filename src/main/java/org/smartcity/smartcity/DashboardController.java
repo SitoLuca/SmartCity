@@ -1,23 +1,24 @@
 package org.smartcity.smartcity;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 
 public class DashboardController extends Controller {
 
 
     @FXML
-    private ListView<String> Sensors;
+    private TableView<Centralina> MatrixSensor;
     @FXML
     private Button SalvaSensore;
     @FXML
@@ -35,14 +36,11 @@ public class DashboardController extends Controller {
     @FXML
     private Label SoglieAggiornate;
     @FXML
-    private DatePicker da;
-    @FXML
-    private DatePicker a;
-    @FXML
     private Button creaGrafico;
 
-    public DashboardController() throws SQLException {
+    ObservableList<Centralina> Tabledata = FXCollections.observableArrayList();
 
+    public DashboardController() {
 
     }
 
@@ -56,11 +54,11 @@ public class DashboardController extends Controller {
                 String nuovaSogliaTemp = tempSoglia.getText();
                 String nuovaSogliaNveicoli = Nveicoli.getText();
 
-                DbManager db = new DbManager();
+                DbManager db = DbManager.getInstance();
 
                 try {
 
-                    String sql = "insert into soglieDiGuardia (sogliaInquinamento, sogliaTemperatura, sogliaN_veicoli) values (" + nuovaSogliaInquinamento + ", " + nuovaSogliaTemp + ","+ nuovaSogliaNveicoli +")";
+                    String sql = "insert into soglieDiGuardia (sogliaInquinamento, sogliaTemperatura, sogliaN_veicoli) values (" + nuovaSogliaInquinamento + ", " + nuovaSogliaTemp + "," + nuovaSogliaNveicoli + ")";
                     db.insert(sql);
 
                     SoglieAggiornate.setOpacity(1);
@@ -78,11 +76,13 @@ public class DashboardController extends Controller {
                 String Nome = newnome.getText();
                 String Posizione = newposizione.getText();
 
-                DbManager db = new DbManager();
+                DbManager db = DbManager.getInstance();
 
+                List<Map<String, Object>> lastId;
                 try {
 
-                    db.insert(Nome);
+                    db.insert("insert into Centralina (locazione,Nome) values ('" + Posizione + "', '" + Nome + "')");
+                    lastId = db.queryExec("select max(id) as id from Centralina");
 
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -91,10 +91,8 @@ public class DashboardController extends Controller {
                 newnome.setText("");
                 newposizione.setText("");
 
-                String Line = "Sensore: " + Nome + " Locazione: " + Posizione;
-
-                Sensors.getItems().add(Line);
-
+                int id = Integer.parseInt(lastId.getFirst().get("id").toString());
+                Tabledata.add(new Centralina(Nome, Posizione, id));
 
             }
         });
@@ -110,28 +108,36 @@ public class DashboardController extends Controller {
 
         putSensors();
 
-
     }
 
     private void putSensors() throws SQLException {
 
-        DbManager DB = new DbManager();
-        List<Map<String, Object>> AllSensors = DB.queryExec("Select * from sensore");
-        //System.out.println(AllSensors.getString("Nome"));
+        MatrixSensor.getColumns().add(createColumn("Id", "id"));
+        MatrixSensor.getColumns().add(createColumn("Nome", "nome"));
+        MatrixSensor.getColumns().add(createColumn("Posizione", "posizione"));
+        MatrixSensor.getColumns().add(createColumn("Status", "status"));
+
+        DbManager DB = DbManager.getInstance();
+        List<Map<String, Object>> AllSensors = DB.queryExec("Select * from Centralina");
 
         for (Map<String, Object> allSensor : AllSensors) {
-
-            String Line = "Sensore: " + allSensor.get("Nome") + " Locazione: " + allSensor.get("locazione");
-
-            Sensors.getItems().add(Line);
+            Tabledata.add(new Centralina(allSensor.get("Nome").toString(), allSensor.get("locazione").toString(), Integer.parseInt(allSensor.get("id").toString())));
         }
 
+        MatrixSensor.setItems(Tabledata);
 
+    }
+
+
+    private TableColumn<Centralina, String> createColumn(String title, String property) {
+        TableColumn<Centralina, String> column = new TableColumn<>(title);
+        column.setCellValueFactory(new PropertyValueFactory<>(property));
+        return column;
     }
 
     private void setsoglie() throws SQLException {
 
-        DbManager db = new DbManager();
+        DbManager db = DbManager.getInstance();
 
         List<Map<String, Object>> soglie = db.queryExec("select * from soglieDiGuardia where data_ora  = (select max(data_ora) from soglieDiGuardia)");
 
