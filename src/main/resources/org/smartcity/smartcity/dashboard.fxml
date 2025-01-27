@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -9,16 +10,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="693.0" prefWidth="610.0" style="-fx-background-color: E3F6FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.smartcity.smartcity.DashboardController">
+<AnchorPane prefHeight="693.0" prefWidth="721.0" style="-fx-background-color: E3F6FA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.smartcity.smartcity.DashboardController">
    <children>
-      <ImageView fitHeight="345.0" fitWidth="601.0" layoutX="1.0" layoutY="216.0" AnchorPane.bottomAnchor="0.0">
+      <ImageView fitHeight="345.0" fitWidth="721.0" layoutX="1.0" layoutY="216.0" AnchorPane.bottomAnchor="0.0">
          <image>
             <Image url="@../../../img/dashboarSkyline.jpeg" />
          </image>
       </ImageView>
-      <HBox layoutX="105.0" layoutY="110.0" prefHeight="25.0" prefWidth="387.0">
+      <HBox layoutX="168.0" layoutY="111.0" prefHeight="25.0" prefWidth="387.0">
          <children>
             <TextField fx:id="inquinamentoSoglia" stylesheets="@../../../Style/dashboard.css" />
             <Separator prefHeight="0.0" prefWidth="44.0" style="-fx-opacity: 0;" />
@@ -27,21 +29,38 @@
             <TextField fx:id="Nveicoli" stylesheets="@../../../Style/dashboard.css" />
          </children>
       </HBox>
-      <Label layoutX="105.0" layoutY="76.0" stylesheets="@../../../Style/dashboard.css" text="Inquinamento" />
-      <Label layoutX="242.0" layoutY="76.0" stylesheets="@../../../Style/dashboard.css" text="Temperatura" />
-      <Label layoutX="391.0" layoutY="76.0" stylesheets="@../../../Style/dashboard.css" text="N veicoli" />
-      <Label id="Title" layoutX="170.0" layoutY="14.0" stylesheets="@../../../Style/dashboard.css" text="Soglie Di Guardia">
+      <Label layoutX="170.0" layoutY="76.0" stylesheets="@../../../Style/dashboard.css" text="Inquinamento" />
+      <Label layoutX="307.0" layoutY="76.0" stylesheets="@../../../Style/dashboard.css" text="Temperatura" />
+      <Label layoutX="451.0" layoutY="76.0" stylesheets="@../../../Style/dashboard.css" text="N veicoli" />
+      <Label id="Title" layoutX="231.0" layoutY="21.0" stylesheets="@../../../Style/dashboard.css" text="Soglie Di Guardia">
          <font>
             <Font size="43.0" />
          </font>
       </Label>
-      <Button fx:id="SalvaSensore" layoutX="23.0" layoutY="307.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Aggiungi" />
-      <Button fx:id="salvaSoglie" layoutX="507.0" layoutY="103.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Salva" />
-      <TextField fx:id="newnome" layoutX="23.0" layoutY="217.0" prefHeight="25.0" prefWidth="102.0" promptText="Nome" stylesheets="@../../../Style/dashboard.css" />
-      <TextField fx:id="newposizione" layoutX="23.0" layoutY="256.0" prefHeight="25.0" prefWidth="102.0" promptText="Posizione" stylesheets="@../../../Style/dashboard.css" />
+      <Button fx:id="salvaSoglie" layoutX="583.0" layoutY="103.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Salva" />
       <Label fx:id="SoglieAggiornate" layoutX="8.0" layoutY="114.0" style="-fx-font-weight: bold; -fx-opacity: 0;" text="Soglie Salvate!" textFill="#5ab965" />
-      <Button fx:id="creaGrafico" layoutX="457.0" layoutY="197.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Crea Grafico" />
-      <Label layoutX="-5.0" layoutY="182.0" stylesheets="@../../../Style/dashboard.css" text="Nuova Centralina" />
-      <TableView fx:id="MatrixSensor" layoutX="152.0" layoutY="148.0" prefHeight="267.0" prefWidth="299.0" />
+      <Button fx:id="creaGrafico" layoutX="558.0" layoutY="377.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Crea Grafico" />
+      <TableView fx:id="MatrixSensor" layoutX="197.0" layoutY="150.0" prefHeight="267.0" prefWidth="332.0" />
+      <Button fx:id="StartCentraline" layoutX="283.0" layoutY="430.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Attiva Centraline" />
+      <Button fx:id="UpdateCentraline" disable="true" layoutX="542.0" layoutY="327.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Centraline Offline" />
+      <VBox layoutX="539.0" layoutY="150.0" prefHeight="125.0" prefWidth="169.0">
+         <children>
+            <Label stylesheets="@../../../Style/dashboard.css" text="Strategia" />
+            <RadioButton fx:id="RadioTargheAlternate" mnemonicParsing="false" selected="true" style="-fx-font-weight: bold;" stylesheets="@../../../Style/dashboard.css" text="Targhe Alternate" />
+            <RadioButton fx:id="RadioDeviaTraffico" mnemonicParsing="false" style="-fx-font-weight: bold;" stylesheets="@../../../Style/dashboard.css" text="Devia Traffico" />
+         </children>
+      </VBox>
+      <VBox layoutX="21.0" layoutY="170.0" prefHeight="169.0" prefWidth="169.0">
+         <children>
+            <Label stylesheets="@../../../Style/dashboard.css" text="Nuova Centralina" />
+            <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+            <TextField fx:id="newnome" prefHeight="25.0" prefWidth="118.0" promptText="Nome" stylesheets="@../../../Style/dashboard.css" />
+            <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+            <TextField fx:id="newposizione" prefHeight="25.0" prefWidth="102.0" promptText="Posizione" stylesheets="@../../../Style/dashboard.css" />
+            <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+         </children>
+      </VBox>
+      <HBox layoutX="34.0" layoutY="489.0" prefHeight="100.0" prefWidth="200.0" />
+      <Button fx:id="SalvaSensore" layoutX="19.0" layoutY="339.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="173.0" stylesheets="@../../../Style/dashboard.css" text="Aggiungi" />
    </children>
 </AnchorPane>

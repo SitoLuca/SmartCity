@@ -61,3 +61,43 @@
     -fx-effect: none; /* Rimuove l'effetto ombra quando il bottone è premuto */
 }
 
+/* Stile di base del RadioButton */
+.radio-button {
+    -fx-font-size: 14px; /* Dimensione del testo */
+    -fx-font-family: "Arial", sans-serif; /* Font del testo */
+    -fx-text-fill: #333333; /* Colore del testo */
+    -fx-padding: 5px 10px; /* Spaziatura interna */
+}
+
+/* Personalizzazione del cerchio del RadioButton */
+.radio-button .radio {
+    -fx-background-color: transparent; /* Sfondo trasparente */
+    -fx-border-color: #cccccc; /* Bordo grigio chiaro */
+    -fx-border-width: 2px; /* Spessore del bordo */
+    -fx-border-radius: 50%; /* Cerchio perfetto */
+    -fx-padding: 3px; /* Distanza interna */
+    -fx-background-insets: 0, 1; /* Insetti per l'effetto di profondità */
+}
+
+/* Cerchio interno quando selezionato */
+.radio-button:selected .radio {
+    -fx-border-color: #4CAF50; /* Colore verde per il bordo selezionato */
+    -fx-background-color: #4CAF50; /* Colore del cerchio interno */
+}
+
+/* Animazione al passaggio del mouse */
+.radio-button .radio:hover {
+    -fx-border-color: #66bb6a; /* Cambia il colore del bordo */
+}
+
+/* Rimuove il focus visibile intorno al RadioButton */
+.radio-button:focused {
+    -fx-focus-color: transparent; /* Rimuove il colore di focus */
+    -fx-effect: none; /* Nessuna ombra */
+}
+
+/* Cerchio interno animato */
+.radio-button:selected .radio {
+    -fx-background-radius: 50%; /* Cerchio perfetto */
+    -fx-background-insets: 2; /* Distanza dal bordo */
+}
