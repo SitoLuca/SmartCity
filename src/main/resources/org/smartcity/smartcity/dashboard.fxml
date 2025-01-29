@@ -62,5 +62,6 @@
       </VBox>
       <HBox layoutX="34.0" layoutY="489.0" prefHeight="100.0" prefWidth="200.0" />
       <Button fx:id="SalvaSensore" layoutX="19.0" layoutY="339.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="173.0" stylesheets="@../../../Style/dashboard.css" text="Aggiungi" />
+      <Button fx:id="VisualizzaLog" layoutX="559.0" layoutY="264.0" mnemonicParsing="false" stylesheets="@../../../Style/dashboard.css" text="Visualizza Log" />
    </children>
 </AnchorPane>

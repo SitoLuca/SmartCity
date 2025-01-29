@@ -5,6 +5,6 @@ public class StrategyDivertTraffic implements Strategy {
     @Override
     public void act() {
 
-        System.out.println("Il traffico è stato deviato su un percorso alternativo");
+        System.out.println("Il Traffico è stato deviato su un altro percorso");
     }
 }

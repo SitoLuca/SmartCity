@@ -8,8 +8,23 @@ public class CentralineManager {
 
     private static CentralineManager instance = null;
     private static ArrayList<Centralina> Centraline = new ArrayList<Centralina>();
+    private float SogliaInquinamento;
+    private float SogliaTemperatura;
+    private int SogliaVeicoli;
 
     private CentralineManager() {
+    }
+
+    public void setSogliaInquinamento(float sogliaInquinamento) {
+        SogliaInquinamento = sogliaInquinamento;
+    }
+
+    public void setSogliaTemperatura(float sogliatemperatura) {
+        SogliaTemperatura = sogliatemperatura;
+    }
+
+    public void setSogliaVeicoli(int sogliaVeicoli) {
+        SogliaVeicoli = sogliaVeicoli;
     }
 
     public static ArrayList<Centralina> getCentraline() {

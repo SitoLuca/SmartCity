@@ -11,8 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 //import java.awt.*;
 import java.io.*;
@@ -53,11 +55,15 @@ public class DashboardController extends Controller {
     private RadioButton RadioTargheAlternate;
     @FXML
     private RadioButton RadioDeviaTraffico;
+    @FXML
+    private Button VisualizzaLog;
 
 
-    ObservableList<Centralina> Tabledata = FXCollections.observableArrayList();
 
+    private ObservableList<Centralina> Tabledata = FXCollections.observableArrayList();
     private CentralineManager manager = CentralineManager.getInstance();
+    private EmergencyManager emergencyManager = EmergencyManager.getInstance();
+    ContextMenu contextMenu = new ContextMenu();
 
     public DashboardController() {
 
@@ -154,6 +160,64 @@ public class DashboardController extends Controller {
             }
         });
 
+        VisualizzaLog.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                LogController logger = LogController.GetInstance();
+                Stage loggerStage = new Stage();
+                logger.start(loggerStage);
+
+                emergencyManager.subscribe(logger);
+
+            }
+        });
+
+        RadioTargheAlternate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (RadioTargheAlternate.isSelected()) {
+                    RadioDeviaTraffico.setSelected(false);
+                    emergencyManager.setStrategy(new StrategyAlternatePlates());
+                    //emergencyManager.act();
+                }else {
+                    RadioTargheAlternate.setSelected(true);
+                }
+
+            }
+        });
+
+        RadioDeviaTraffico.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (RadioDeviaTraffico.isSelected()) {
+                    RadioTargheAlternate.setSelected(false);
+                    emergencyManager.setStrategy(new StrategyDivertTraffic());
+                    //emergencyManager.act();
+                }else {
+                    RadioDeviaTraffico.setSelected(true);
+                }
+            }
+        });
+
+        emergencyManager.setStrategy(new StrategyAlternatePlates());
+
+        MenuItem GestisciItem = new MenuItem("Gestisci");
+        GestisciItem.setOnAction(event -> emergencyManager.act());
+        contextMenu.getItems().add(GestisciItem);
+
+        MatrixSensor.setRowFactory(tv -> {
+            TableRow<Centralina> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                Centralina centralina = row.getItem();
+                if (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY && "Rosso".equalsIgnoreCase(centralina.getCodice())) {
+                    contextMenu.show(row, event.getScreenX(), event.getScreenY());
+                } else {
+                    contextMenu.hide();
+                }
+            });
+            return row;
+        });
+
         setsoglie();
 
         putSensors();
@@ -188,7 +252,6 @@ public class DashboardController extends Controller {
         MatrixSensor.setItems(Tabledata);
 
     }
-
 
     private TableColumn<Centralina, String> createColumn(String title, String property) {
         TableColumn<Centralina, String> col = new TableColumn<>(title);
@@ -260,6 +323,10 @@ public class DashboardController extends Controller {
         DbManager db = DbManager.getInstance();
 
         List<Map<String, Object>> soglie = db.queryExec("select * from soglieDiGuardia where data_ora  = (select max(data_ora) from soglieDiGuardia)");
+
+        manager.setSogliaInquinamento(Float.parseFloat(soglie.getFirst().get("sogliaInquinamento").toString()));
+        manager.setSogliaTemperatura(Float.parseFloat(soglie.getFirst().get("sogliaTemperatura").toString()));
+        manager.setSogliaVeicoli(Integer.parseInt(soglie.getFirst().get("sogliaN_veicoli").toString()));
 
         inquinamentoSoglia.setText(soglie.getFirst().get("sogliaInquinamento").toString()); //Assegno i valori
         tempSoglia.setText(soglie.getFirst().get("sogliaTemperatura").toString());
