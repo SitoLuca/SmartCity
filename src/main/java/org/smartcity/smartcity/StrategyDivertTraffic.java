@@ -1,10 +1,15 @@
 package org.smartcity.smartcity;
 
+import java.util.ArrayList;
+
 public class StrategyDivertTraffic implements Strategy {
 
     @Override
-    public void act() {
+    public ArrayList<String> act() {
+        ArrayList<String> ActionPerformed = new ArrayList<>();
+        ActionPerformed.add("INFO:Traffico deviato su un altro percorso");
 
-        System.out.println("Il Traffico è stato deviato su un altro percorso");
+        return ActionPerformed;
+
     }
 }

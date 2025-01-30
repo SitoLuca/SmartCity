@@ -2,6 +2,7 @@ package org.smartcity.smartcity;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 public class CentralineManager {
@@ -51,8 +52,36 @@ public class CentralineManager {
 
     public void detectall() throws SQLException {
         for (Centralina centralina : Centraline) {
-            centralina.detect();
+            Map<String, Float> ris = centralina.detect();
+
+            if (countCriticParams(ris) <= 1) {
+                centralina.setCodice(Codice.Verde);
+            }
+            if (countCriticParams(ris) == 2) {
+                centralina.setCodice(Codice.Giallo);
+            }
+            if (countCriticParams(ris) == 3) {
+                centralina.setCodice(Codice.Rosso);
+            }
+
         }
+    }
+
+    private int countCriticParams(Map<String, Float> params){
+
+        int n = 0;
+
+        if (params.get("Temperatura") > SogliaTemperatura){
+            n += 1;
+        }
+        if (params.get("inquinamento") > SogliaInquinamento){
+            n += 1;
+        }
+        if (params.get("N_Veicoli") > SogliaVeicoli){
+            n += 1;
+        }
+
+        return n;
     }
 
 }

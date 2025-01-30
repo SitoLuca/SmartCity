@@ -1,7 +1,8 @@
 package org.smartcity.smartcity;
 
 import java.sql.SQLException;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Centralina {
@@ -43,32 +44,36 @@ public class Centralina {
         this.status = status;
     }
 
-    private void setCodice(Codice codice) {
+    public void setCodice(Codice codice) {
         this.codice = codice;
     }
 
-    public void detect() throws SQLException {
+    public Map<String, Float> detect() throws SQLException {
 
         if (status == Status.offline) {
             System.out.println("Device offline");
         } else {
             DbManager manager = DbManager.getInstance();
 
-            int inquinamento = Math.abs(ThreadLocalRandom.current().nextInt() % 100);
-            int temperatura = Math.abs(ThreadLocalRandom.current().nextInt() % 40);
-            int n_vec = Math.abs(ThreadLocalRandom.current().nextInt() % 50);
+            float inquinamento = Math.abs(ThreadLocalRandom.current().nextInt() % 100);
+            float temperatura = Math.abs(ThreadLocalRandom.current().nextInt() % 40);
+            float n_vec = Math.abs(ThreadLocalRandom.current().nextInt() % 50);
 
             String sql = "insert into log_sensore (inquinamento, temperatura, n_veicoli, id_sensore) values (" + inquinamento + "," + temperatura + "," + n_vec + "," + this.id + ")";
             manager.insert(sql);
 
-            Codice[] values = Codice.values(); // Ottieni tutti i valori dell'enum
-            int randomIndex = new Random().nextInt(values.length);
+            Map<String, Float> params = new HashMap<String, Float>();
 
-            this.codice = values[randomIndex];
+            params.put("Temperatura", temperatura);
+            params.put("N_Veicoli", n_vec);
+            params.put("inquinamento", inquinamento);
+
+            return params;
+
 
         }
 
-
+        return null;
     }
 
 }

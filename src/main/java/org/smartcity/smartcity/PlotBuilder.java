@@ -1,8 +1,32 @@
 package org.smartcity.smartcity;
 
-public class PlotBuilder {
+import java.io.Serializable;
 
-    public void plot(){
-        //xAxis.setLabel("Years");
+public class PlotBuilder implements ChartBuilder {
+
+
+    @Override
+    public void setTitle(String title) {
+
+    }
+
+    @Override
+    public void setXAxisLable(String xAxisTitle) {
+
+    }
+
+    @Override
+    public void setYAxisLable(String yAxisTitle) {
+
+    }
+
+    @Override
+    public void addDataPoint(String x, String y) {
+
+    }
+
+    @Override
+    public void build() {
+
     }
 }

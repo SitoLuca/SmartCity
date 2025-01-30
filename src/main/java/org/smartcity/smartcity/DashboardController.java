@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,7 +21,6 @@ import javafx.stage.Stage;
 //import java.awt.*;
 import java.io.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -59,10 +60,9 @@ public class DashboardController extends Controller {
     private Button VisualizzaLog;
 
 
-
     private ObservableList<Centralina> Tabledata = FXCollections.observableArrayList();
-    private CentralineManager manager = CentralineManager.getInstance();
-    private EmergencyManager emergencyManager = EmergencyManager.getInstance();
+    private final CentralineManager manager = CentralineManager.getInstance();
+    private final EmergencyManager emergencyManager = EmergencyManager.getInstance();
     ContextMenu contextMenu = new ContextMenu();
 
     public DashboardController() {
@@ -85,7 +85,9 @@ public class DashboardController extends Controller {
 
                     String sql = "insert into soglieDiGuardia (sogliaInquinamento, sogliaTemperatura, sogliaN_veicoli) values (" + nuovaSogliaInquinamento + ", " + nuovaSogliaTemp + "," + nuovaSogliaNveicoli + ")";
                     db.insert(sql);
-
+                    manager.setSogliaInquinamento(Float.parseFloat(nuovaSogliaInquinamento));
+                    manager.setSogliaTemperatura(Float.parseFloat(nuovaSogliaTemp));
+                    manager.setSogliaVeicoli(Integer.parseInt(nuovaSogliaNveicoli));
                     SoglieAggiornate.setOpacity(1);
 
                 } catch (SQLException e) {
@@ -127,7 +129,12 @@ public class DashboardController extends Controller {
         creaGrafico.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //Fai il grafico
+                PlotController plot = new PlotController();
+                try {
+                    plot.start(new Stage());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 

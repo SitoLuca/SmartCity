@@ -55,9 +55,8 @@ public class LogController extends Application implements Subscriber{
             case "WARNING":
                 logText.setFill(Color.ORANGE);
                 break;
-            case "ERROR":
+            case "CRITICAL":
                 logText.setFill(Color.RED);
-                logText.setFont(Font.font("Verdana", 14));
                 break;
             default:
                 logText.setFill(Color.BLACK);

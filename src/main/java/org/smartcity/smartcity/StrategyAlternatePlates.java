@@ -1,9 +1,23 @@
 package org.smartcity.smartcity;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class StrategyAlternatePlates implements Strategy {
 
     @Override
-    public void act() {
-        System.out.println("Traffico consentito solo a targhe alterne");
+    public ArrayList<String> act() {
+        ArrayList<String> ActionPerformed = new ArrayList<>();
+        ActionPerformed.add("INFO:Emergenza Gestita a Targhe alterne");
+
+        Random rand = new Random();
+        int randomNumber = rand.nextInt(4) + 1; // Genera un numero da 1 a 4
+
+        if (randomNumber == 4){
+            ActionPerformed.add("WARNING:Violazione rilevata");
+            ActionPerformed.add("CRITICAL:Trasgressione segnalata alle autorità");
+        }
+
+       return ActionPerformed;
     }
 }

@@ -22,9 +22,9 @@ public class EmergencyManager implements Publisher{
     }
 
     @Override
-    public void notifySubscribers() {
+    public void notifySubscribers(String level , String message) {
         for (Subscriber subscriber : subscribers) {
-            subscriber.Update("INFO", "Ciao");
+            subscriber.Update(level, message);
         }
     }
 
@@ -38,12 +38,17 @@ public class EmergencyManager implements Publisher{
 
     public void setStrategy(Strategy strategy) {
         this.strategy = strategy;
-        notifySubscribers();
+        //notifySubscribers();
     }
 
     public void act(){
-        strategy.act();
-        notifySubscribers();
+        ArrayList<String> actions = strategy.act();
+
+        for (String action : actions) {
+            String[] levelMessage = action.split(":");
+
+            notifySubscribers(levelMessage[0],levelMessage[1]);
+        }
     }
 
 }

@@ -1,0 +1,48 @@
+/* Stile per il LineChart */
+.line-chart {
+    -fx-background-color: white;
+    -fx-border-color: green;
+    -fx-border-width: 2px;
+}
+
+/* Stile per la linea del grafico */
+.default-color0.chart-series-line {
+    -fx-stroke: green;
+    -fx-stroke-width: 2px;
+}
+
+/* Stile per i punti del grafico */
+.default-color0.chart-line-symbol {
+    -fx-background-color: green, white;
+    -fx-background-insets: 0, 2;
+    -fx-padding: 5px;
+}
+
+/* Stile per il DatePicker */
+.date-picker {
+    -fx-background-color: white;
+    -fx-border-color: green;
+    -fx-border-width: 2px;
+    -fx-text-fill: green;
+}
+
+/* Stile per il popup del DatePicker */
+.date-picker-popup .month-year-pane {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .day-cell {
+    -fx-background-color: white;
+    -fx-text-fill: green;
+}
+
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .selected {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+}
