@@ -1,4 +1,4 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.dbProxy;
 
 import java.sql.*;
 import java.util.*;
@@ -10,42 +10,17 @@ import java.util.*;
  * DDL: src/main/resources/DB/DDL.sql
  */
 
-public class DbManager {
+public class ConcreteDbManager implements DbManager {
 
-    private static DbManager instance = null;
+    Connection conn;
 
-    private DbManager() {
+    ConcreteDbManager(Connection con) {
+        conn = con;
     }
 
-    public static DbManager getInstance() {
-        /*
-        Semplificazione di
-        if (instance == null) {return new DbManager; } else { return instance; }
-        */
-        return Objects.requireNonNullElseGet(instance, DbManager::new);
-    }
-
-    private Connection connect() throws SQLException {
-        String path = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\src\\main\\resources\\DB\\SmartCityDb.sqlite"; //Database file Path, specificando i driver
-        try {
-
-            Connection conn = DriverManager.getConnection(path); //Connect
-            conn.setAutoCommit(true);
-            return conn; //Connection Done
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null; //Connection failed
-        }
-
-
-    }
-
-
+    @Override
     public final List<Map<String, Object>> queryExec(String query) throws SQLException {
         try {
-
-            Connection conn = connect();
 
             assert conn != null;
 
@@ -71,7 +46,6 @@ public class DbManager {
             }
 
             stm.close();
-            conn.close();
 
             return queryRes;
 
@@ -83,22 +57,15 @@ public class DbManager {
 
     }
 
+    @Override
     public void insert(String SQL) throws SQLException {
-        try {
 
-            Connection conn = connect();
+        assert conn != null;
 
-            assert conn != null;
-            Statement ps = conn.createStatement(); //Preparo lo statement
+        Statement ps = conn.createStatement(); //Preparo lo statement
+        ps.executeUpdate(SQL);
 
-            ps.executeUpdate(SQL);
 
-            conn.close();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage()); //Mostra errore
-            throw e;
-        }
     }
 
 

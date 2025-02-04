@@ -1,4 +1,4 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.strategy;
 
 import java.util.ArrayList;
 import java.util.Random;

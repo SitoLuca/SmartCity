@@ -1,4 +1,4 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.enums;
 
 public enum Status {
     online,offline

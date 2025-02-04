@@ -1,4 +1,8 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.managers;
+
+import org.smartcity.smartcity.Centralina;
+import org.smartcity.smartcity.enums.Codice;
+import org.smartcity.smartcity.enums.Status;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

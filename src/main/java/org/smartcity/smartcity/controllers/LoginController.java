@@ -1,13 +1,14 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.smartcity.smartcity.dbProxy.ConcreteDbManager;
+import org.smartcity.smartcity.dbProxy.DbManagerProxy;
 
 import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class LoginController extends Controller {
     private Label CNV;
 
     public void Submit(ActionEvent e) throws SQLException, IOException { //Event Listener click pulsante Submit
-        DbManager Db = DbManager.getInstance();;
+        DbManagerProxy Db = new DbManagerProxy();
 
         List<Map<String, Object>> res = Db.queryExec("Select * from user where email = '" + email.getText() + "' and password = '" + psw.getText() + "'"); //Costruisce la query in base all' input
 

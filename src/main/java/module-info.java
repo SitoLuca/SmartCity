@@ -16,4 +16,16 @@ module org.smartcity.smartcity {
 
     opens org.smartcity.smartcity to javafx.fxml;
     exports org.smartcity.smartcity;
+    exports org.smartcity.smartcity.controllers;
+    opens org.smartcity.smartcity.controllers to javafx.fxml;
+    exports org.smartcity.smartcity.strategy;
+    opens org.smartcity.smartcity.strategy to javafx.fxml;
+    exports org.smartcity.smartcity.managers;
+    opens org.smartcity.smartcity.managers to javafx.fxml;
+    exports org.smartcity.smartcity.enums;
+    opens org.smartcity.smartcity.enums to javafx.fxml;
+    exports org.smartcity.smartcity.dbProxy;
+    opens org.smartcity.smartcity.dbProxy to javafx.fxml;
+    exports org.smartcity.smartcity.builder;
+    opens org.smartcity.smartcity.builder to javafx.fxml;
 }

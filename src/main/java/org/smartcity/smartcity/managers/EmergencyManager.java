@@ -1,10 +1,13 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.managers;
 
-import java.io.Serializable;
+import org.smartcity.smartcity.strategy.Publisher;
+import org.smartcity.smartcity.strategy.Subscriber;
+import org.smartcity.smartcity.strategy.Strategy;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class EmergencyManager implements Publisher{
+public class EmergencyManager implements Publisher {
     private Strategy strategy;
 
     private static EmergencyManager instance = null;

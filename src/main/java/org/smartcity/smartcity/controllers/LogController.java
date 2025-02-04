@@ -1,20 +1,19 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.controllers;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import org.smartcity.smartcity.strategy.Subscriber;
 
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class LogController extends Application implements Subscriber{
+public class LogController extends Application implements Subscriber {
     private final TextFlow logFlow = new TextFlow();
     private static LogController instance = null;
 

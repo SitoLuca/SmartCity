@@ -1,8 +1,10 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.smartcity.smartcity.Main;
+
 import java.io.IOException;
 
 

@@ -1,9 +1,6 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.controllers;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,9 +10,13 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.smartcity.smartcity.builder.LinechartBuilder;
+import org.smartcity.smartcity.dbProxy.ConcreteDbManager;
+import org.smartcity.smartcity.Main;
+import org.smartcity.smartcity.dbProxy.DbManagerProxy;
 
-import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -26,13 +27,13 @@ public class PlotController extends Application {
     @FXML
     private Button build;
     @FXML
-    private LineChart<String, Number> linechart;
-
-    @FXML
     private DatePicker dateFrom;
     @FXML
     private DatePicker DateTo;
+    @FXML
+    private Pane ChartPane ;
 
+    LineChart<String, Number> lineChart;
 
     public PlotController() {
     }
@@ -73,7 +74,8 @@ public class PlotController extends Application {
         DateTo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println(DateTo.getValue().toString());
+                System.out.println(DateTo.getValue());
+
             }
         });
 
@@ -82,8 +84,11 @@ public class PlotController extends Application {
     private void DrawLineChart() throws SQLException {
         //PlotBuilder builder = new PlotBuilder();
 
-        DbManager manager = DbManager.getInstance();
+        DbManagerProxy db = new DbManagerProxy();
 
+        LinechartBuilder builder = new LinechartBuilder();
+
+/*
         linechart.getData().clear();
 
         linechart.setTitle("Grafico");
@@ -115,6 +120,8 @@ public class PlotController extends Application {
         }
 
         linechart.getData().addAll(List.of(tempSeries,veicoliSeries,inquinamentoSeries));
+
+ */
     }
 
 }

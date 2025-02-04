@@ -1,13 +1,10 @@
-package org.smartcity.smartcity;
+package org.smartcity.smartcity.controllers;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +14,13 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import org.smartcity.smartcity.*;
+import org.smartcity.smartcity.dbProxy.DbManagerProxy;
+import org.smartcity.smartcity.managers.CentralineManager;
+import org.smartcity.smartcity.dbProxy.ConcreteDbManager;
+import org.smartcity.smartcity.managers.EmergencyManager;
+import org.smartcity.smartcity.strategy.StrategyAlternatePlates;
+import org.smartcity.smartcity.strategy.StrategyDivertTraffic;
 
 //import java.awt.*;
 import java.io.*;
@@ -79,7 +83,7 @@ public class DashboardController extends Controller {
                 String nuovaSogliaTemp = tempSoglia.getText();
                 String nuovaSogliaNveicoli = Nveicoli.getText();
 
-                DbManager db = DbManager.getInstance();
+                DbManagerProxy db = new DbManagerProxy();
 
                 try {
 
@@ -103,7 +107,7 @@ public class DashboardController extends Controller {
                 String Nome = newnome.getText();
                 String Posizione = newposizione.getText();
 
-                DbManager db = DbManager.getInstance();
+                DbManagerProxy db = new DbManagerProxy();
 
                 List<Map<String, Object>> lastId;
                 try {
@@ -243,8 +247,8 @@ public class DashboardController extends Controller {
         MatrixSensor.getColumns().add(createColumn("Codice", "codice"));
 
         if (manager.getNumberOfCentraline() == 0) {
-            DbManager DB = DbManager.getInstance();
-            List<Map<String, Object>> AllSensors = DB.queryExec("Select * from Centralina");
+            DbManagerProxy db = new DbManagerProxy();
+            List<Map<String, Object>> AllSensors = db.queryExec("Select * from Centralina");
 
             for (Map<String, Object> allSensor : AllSensors) {
                 Centralina c = new Centralina(allSensor.get("Nome").toString(), allSensor.get("locazione").toString(), Integer.parseInt(allSensor.get("id").toString()));
@@ -327,7 +331,7 @@ public class DashboardController extends Controller {
 
     private void setsoglie() throws SQLException {
 
-        DbManager db = DbManager.getInstance();
+        DbManagerProxy db = new DbManagerProxy();
 
         List<Map<String, Object>> soglie = db.queryExec("select * from soglieDiGuardia where data_ora  = (select max(data_ora) from soglieDiGuardia)");
 

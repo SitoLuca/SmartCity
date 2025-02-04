@@ -1,5 +1,10 @@
 package org.smartcity.smartcity;
 
+import org.smartcity.smartcity.dbProxy.DbManagerProxy;
+import org.smartcity.smartcity.enums.Codice;
+import org.smartcity.smartcity.enums.Status;
+import org.smartcity.smartcity.dbProxy.ConcreteDbManager;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +58,7 @@ public class Centralina {
         if (status == Status.offline) {
             System.out.println("Device offline");
         } else {
-            DbManager manager = DbManager.getInstance();
+            DbManagerProxy manager = new DbManagerProxy();
 
             float inquinamento = Math.abs(ThreadLocalRandom.current().nextInt() % 100);
             float temperatura = Math.abs(ThreadLocalRandom.current().nextInt() % 40);

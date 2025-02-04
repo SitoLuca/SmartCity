@@ -46,3 +46,56 @@
     -fx-background-color: green;
     -fx-text-fill: white;
 }
+
+/* Stile base della CheckBox */
+.check-box {
+    -fx-background-color: transparent;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-font-weight: bold;
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* Stile al passaggio del mouse */
+.check-box:hover {
+    -fx-border-color: #45a049;
+    -fx-text-fill: #45a049;
+}
+
+/* Quando la CheckBox è selezionata */
+.check-box:selected {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-border-color: #388E3C;
+}
+
+/* Quando la CheckBox è selezionata e il mouse è sopra */
+.check-box:selected:hover {
+    -fx-background-color: #388E3C;
+}
+
+/* Personalizzazione del box di spunta */
+.check-box .box {
+    -fx-background-color: white;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2px;
+    -fx-border-radius: 3px;
+    -fx-min-width: 16px;
+    -fx-min-height: 16px;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #4CAF50;
+    -fx-border-color: #388E3C;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+    -fx-shape: "M 0 4 L 2 6 L 6 2";
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
