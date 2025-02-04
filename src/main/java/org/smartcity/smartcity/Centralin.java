@@ -3,30 +3,29 @@ package org.smartcity.smartcity;
 import org.smartcity.smartcity.dbProxy.DbManagerProxy;
 import org.smartcity.smartcity.enums.Codice;
 import org.smartcity.smartcity.enums.Status;
-import org.smartcity.smartcity.dbProxy.ConcreteDbManager;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Centralina {
+public class Centralin {
     private final int id;
-    private final String nome;
+    private final String name;
     private final String posizione;
     private Status status;
     private Codice codice;
 
-    public Centralina(String Nome, String Posizione, int Id) {
+    public Centralin(String name, String Posizione, int Id) {
         id = Id;
-        nome = Nome;
+        this.name = name;
         posizione = Posizione;
         status = Status.offline;
         codice = Codice.Unknown;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     public String getPosizione() {

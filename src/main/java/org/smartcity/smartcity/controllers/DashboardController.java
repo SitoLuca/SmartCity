@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import org.smartcity.smartcity.*;
 import org.smartcity.smartcity.dbProxy.DbManagerProxy;
 import org.smartcity.smartcity.managers.CentralineManager;
-import org.smartcity.smartcity.dbProxy.ConcreteDbManager;
 import org.smartcity.smartcity.managers.EmergencyManager;
 import org.smartcity.smartcity.strategy.StrategyAlternatePlates;
 import org.smartcity.smartcity.strategy.StrategyDivertTraffic;
@@ -33,7 +32,7 @@ public class DashboardController extends Controller {
 
 
     @FXML
-    private TableView<Centralina> MatrixSensor;
+    private TableView<Centralin> MatrixSensor;
     @FXML
     private Button SalvaSensore;
     @FXML
@@ -64,7 +63,7 @@ public class DashboardController extends Controller {
     private Button VisualizzaLog;
 
 
-    private ObservableList<Centralina> Tabledata = FXCollections.observableArrayList();
+    private ObservableList<Centralin> Tabledata = FXCollections.observableArrayList();
     private final CentralineManager manager = CentralineManager.getInstance();
     private final EmergencyManager emergencyManager = EmergencyManager.getInstance();
     ContextMenu contextMenu = new ContextMenu();
@@ -123,9 +122,9 @@ public class DashboardController extends Controller {
                 newposizione.setText("");
 
                 int id = Integer.parseInt(lastId.getFirst().get("id").toString());
-                Centralina newCentralina = new Centralina(Nome, Posizione, id);
-                manager.addCentralina(newCentralina);
-                Tabledata.add(newCentralina);
+                Centralin newCentralin = new Centralin(Nome, Posizione, id);
+                manager.addCentralina(newCentralin);
+                Tabledata.add(newCentralin);
 
             }
         });
@@ -217,10 +216,10 @@ public class DashboardController extends Controller {
         contextMenu.getItems().add(GestisciItem);
 
         MatrixSensor.setRowFactory(tv -> {
-            TableRow<Centralina> row = new TableRow<>();
+            TableRow<Centralin> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                Centralina centralina = row.getItem();
-                if (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY && "Rosso".equalsIgnoreCase(centralina.getCodice())) {
+                Centralin centralin = row.getItem();
+                if (!row.isEmpty() && event.getButton() == MouseButton.SECONDARY && "Rosso".equalsIgnoreCase(centralin.getCodice())) {
                     contextMenu.show(row, event.getScreenX(), event.getScreenY());
                 } else {
                     contextMenu.hide();
@@ -251,7 +250,7 @@ public class DashboardController extends Controller {
             List<Map<String, Object>> AllSensors = db.queryExec("Select * from Centralina");
 
             for (Map<String, Object> allSensor : AllSensors) {
-                Centralina c = new Centralina(allSensor.get("Nome").toString(), allSensor.get("locazione").toString(), Integer.parseInt(allSensor.get("id").toString()));
+                Centralin c = new Centralin(allSensor.get("Nome").toString(), allSensor.get("locazione").toString(), Integer.parseInt(allSensor.get("id").toString()));
                 manager.addCentralina(c);
                 Tabledata.add(c);
             }
@@ -264,12 +263,12 @@ public class DashboardController extends Controller {
 
     }
 
-    private TableColumn<Centralina, String> createColumn(String title, String property) {
-        TableColumn<Centralina, String> col = new TableColumn<>(title);
+    private TableColumn<Centralin, String> createColumn(String title, String property) {
+        TableColumn<Centralin, String> col = new TableColumn<>(title);
         col.setCellValueFactory(new PropertyValueFactory<>(property));
 
         if (property.equalsIgnoreCase("status")) {
-            col.setCellFactory(column -> new TableCell<Centralina, String>() {
+            col.setCellFactory(column -> new TableCell<Centralin, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -290,7 +289,7 @@ public class DashboardController extends Controller {
         }
 
         if (property.equalsIgnoreCase("codice")) {
-            col.setCellFactory(column -> new TableCell<Centralina, String>() {
+            col.setCellFactory(column -> new TableCell<Centralin, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);

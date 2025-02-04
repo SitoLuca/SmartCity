@@ -23,9 +23,9 @@
       </Button>
       <HBox layoutX="144.0" layoutY="95.0" prefHeight="41.0" prefWidth="412.0" spacing="22.0">
          <children>
-            <CheckBox mnemonicParsing="false" prefHeight="37.0" prefWidth="151.0" stylesheets="@../../../Style/Chart.css" text="Inquinamento" />
-            <CheckBox mnemonicParsing="false" stylesheets="@../../../Style/Chart.css" text="Temperatura" />
-            <CheckBox mnemonicParsing="false" stylesheets="@../../../Style/Chart.css" text="Veicoli" />
+            <CheckBox fx:id="CheckInquinamento" mnemonicParsing="false" prefHeight="37.0" prefWidth="151.0" stylesheets="@../../../Style/Chart.css" text="Inquinamento" />
+            <CheckBox fx:id="CheckTemperatura" mnemonicParsing="false" stylesheets="@../../../Style/Chart.css" text="Temperatura" />
+            <CheckBox fx:id="CheckVeicoli" mnemonicParsing="false" stylesheets="@../../../Style/Chart.css" text="Veicoli" />
          </children>
       </HBox>
       <Pane fx:id="ChartPane" layoutX="13.0" layoutY="155.0" prefHeight="410.0" prefWidth="712.0" />

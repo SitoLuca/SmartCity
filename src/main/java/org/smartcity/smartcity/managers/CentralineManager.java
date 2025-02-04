@@ -1,6 +1,6 @@
 package org.smartcity.smartcity.managers;
 
-import org.smartcity.smartcity.Centralina;
+import org.smartcity.smartcity.Centralin;
 import org.smartcity.smartcity.enums.Codice;
 import org.smartcity.smartcity.enums.Status;
 
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class CentralineManager {
 
     private static CentralineManager instance = null;
-    private static ArrayList<Centralina> Centraline = new ArrayList<Centralina>();
+    private static ArrayList<Centralin> Centraline = new ArrayList<Centralin>();
     private float SogliaInquinamento;
     private float SogliaTemperatura;
     private int SogliaVeicoli;
@@ -32,7 +32,7 @@ public class CentralineManager {
         SogliaVeicoli = sogliaVeicoli;
     }
 
-    public static ArrayList<Centralina> getCentraline() {
+    public static ArrayList<Centralin> getCentraline() {
         return Centraline;
     }
 
@@ -40,13 +40,13 @@ public class CentralineManager {
         return Objects.requireNonNullElseGet(instance, CentralineManager::new);
     }
 
-    public static void addCentralina(Centralina centralina) {
-        Centraline.add(centralina);
+    public static void addCentralina(Centralin centralin) {
+        Centraline.add(centralin);
     }
 
     public void activateAll() {
-        for (Centralina centralina : Centraline) {
-            centralina.setStatus(Status.online);
+        for (Centralin centralin : Centraline) {
+            centralin.setStatus(Status.online);
         }
     }
 
@@ -55,17 +55,17 @@ public class CentralineManager {
     }
 
     public void detectall() throws SQLException {
-        for (Centralina centralina : Centraline) {
-            Map<String, Float> ris = centralina.detect();
+        for (Centralin centralin : Centraline) {
+            Map<String, Float> ris = centralin.detect();
 
             if (countCriticParams(ris) <= 1) {
-                centralina.setCodice(Codice.Verde);
+                centralin.setCodice(Codice.Verde);
             }
             if (countCriticParams(ris) == 2) {
-                centralina.setCodice(Codice.Giallo);
+                centralin.setCodice(Codice.Giallo);
             }
             if (countCriticParams(ris) == 3) {
-                centralina.setCodice(Codice.Rosso);
+                centralin.setCodice(Codice.Rosso);
             }
 
         }

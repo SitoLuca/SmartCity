@@ -1,103 +1,101 @@
-/* CSS per una TextField carina in JavaFX */
 
 #Title{
-    -fx-text-fill: #4CAF50; /* Colore del testo verde */
-    -fx-font-size: 30px; /* Dimensione del testo */
-    -fx-font-family: "Arial", sans-serif; /* Font */
-    -fx-font-weight: bold; /* Grassetto */
-    -fx-padding: 5px; /* Padding interno */
+    -fx-text-fill: #4CAF50;
+    -fx-font-size: 30px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-weight: bold;
+    -fx-padding: 5px;
 }
 
 .text-field {
-    -fx-background-color: #ffffff; /* Sfondo bianco */
-    -fx-border-radius: 10; /* Angoli arrotondati */
-    -fx-border-width: 2; /* Larghezza del bordo */
-    -fx-border-color: #4CAF50; /* Colore del bordo verde */
-    -fx-padding: 3px; /* Padding interno */
-    -fx-font-size: 13px; /* Dimensione del testo */
-    -fx-font-family: "Arial", sans-serif; /* Font */
-    -fx-text-fill: #333333; /* Colore del testo */
-    -fx-focus-color: #4CAF50; /* Colore di focus verde */
-    -fx-hover-border-color: #81C784; /* Colore del bordo al passaggio del mouse */
-    -fx-background-insets: 0, 1; /* Insetto di sfondo per l'effetto di profondità */
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-border-color: #4CAF50;
+    -fx-padding: 3px;
+    -fx-font-size: 13px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-text-fill: #333333;
+    -fx-focus-color: #4CAF50;
+    -fx-hover-border-color: #81C784;
+    -fx-background-insets: 0, 1;
 }
 
 .text-field:focused {
-    -fx-border-color: #66bb6a; /* Colore più chiaro quando è selezionata */
+    -fx-border-color: #66bb6a;
 }
 
 .text-field:hover {
-    -fx-border-color: #81C784; /* Colore del bordo al passaggio del mouse */
+    -fx-border-color: #81C784;
 }
 
-/* CSS per una Label carina in JavaFX */
+
 .label {
-    -fx-text-fill: #4CAF50; /* Colore del testo verde */
-    -fx-font-size: 18px; /* Dimensione del testo */
-    -fx-font-family: "Arial", sans-serif; /* Font */
-    -fx-font-weight: bold; /* Grassetto */
-    -fx-padding: 5px; /* Padding interno */
+    -fx-text-fill: #4CAF50;
+    -fx-font-size: 18px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-weight: bold;
+    -fx-padding: 5px;
 }
 
-/* CSS per un Button carino in JavaFX */
+
 .button {
-    -fx-background-color: #4CAF50; /* Colore di sfondo verde */
-    -fx-text-fill: white; /* Colore del testo bianco */
-    -fx-font-size: 16px; /* Dimensione del testo */
-    -fx-font-family: "Arial", sans-serif; /* Font */
-    -fx-padding: 10px 20px; /* Padding per il bottone */
-    -fx-background-radius: 8; /* Angoli arrotondati */
-    -fx-border-width: 0; /* Nessun bordo visibile */
-    -fx-cursor: hand; /* Cambia il cursore a mano */
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 1, 1); /* Effetto ombra */
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 8;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 1, 1);
 }
 
 .button:hover {
-    -fx-background-color: #66bb6a; /* Colore più chiaro al passaggio del mouse */
+    -fx-background-color: #66bb6a;
 }
 
 .button:pressed {
-    -fx-background-color: #388e3c; /* Colore ancora più scuro quando premuto */
-    -fx-effect: none; /* Rimuove l'effetto ombra quando il bottone è premuto */
+    -fx-background-color: #388e3c;
+    -fx-effect: none;
 }
 
-/* Stile di base del RadioButton */
-.radio-button {
-    -fx-font-size: 14px; /* Dimensione del testo */
-    -fx-font-family: "Arial", sans-serif; /* Font del testo */
-    -fx-text-fill: #333333; /* Colore del testo */
-    -fx-padding: 5px 10px; /* Spaziatura interna */
+radio-button {
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-text-fill: #333333;
+    -fx-padding: 5px 10px;
 }
 
-/* Personalizzazione del cerchio del RadioButton */
+
 .radio-button .radio {
-    -fx-background-color: transparent; /* Sfondo trasparente */
-    -fx-border-color: #cccccc; /* Bordo grigio chiaro */
-    -fx-border-width: 2px; /* Spessore del bordo */
-    -fx-border-radius: 50%; /* Cerchio perfetto */
-    -fx-padding: 3px; /* Distanza interna */
-    -fx-background-insets: 0, 1; /* Insetti per l'effetto di profondità */
+    -fx-background-color: transparent;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 2px;
+    -fx-border-radius: 50%;
+    -fx-padding: 3px;
+    -fx-background-insets: 0, 1;
 }
 
-/* Cerchio interno quando selezionato */
+
 .radio-button:selected .radio {
-    -fx-border-color: #4CAF50; /* Colore verde per il bordo selezionato */
-    -fx-background-color: #4CAF50; /* Colore del cerchio interno */
+    -fx-border-color: #4CAF50;
+    -fx-background-color: #4CAF50;
 }
 
-/* Animazione al passaggio del mouse */
+
 .radio-button .radio:hover {
-    -fx-border-color: #66bb6a; /* Cambia il colore del bordo */
+    -fx-border-color: #66bb6a;
 }
 
-/* Rimuove il focus visibile intorno al RadioButton */
+
 .radio-button:focused {
-    -fx-focus-color: transparent; /* Rimuove il colore di focus */
-    -fx-effect: none; /* Nessuna ombra */
+    -fx-focus-color: transparent;
+    -fx-effect: none;
 }
 
-/* Cerchio interno animato */
+
 .radio-button:selected .radio {
-    -fx-background-radius: 50%; /* Cerchio perfetto */
-    -fx-background-insets: 2; /* Distanza dal bordo */
+    -fx-background-radius: 50%;
+    -fx-background-insets: 2;
 }

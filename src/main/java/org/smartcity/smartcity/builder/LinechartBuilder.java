@@ -1,11 +1,12 @@
 package org.smartcity.smartcity.builder;
 
+import javafx.scene.chart.Axis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 
 import java.util.ArrayList;
 
-public class LinechartBuilder implements ChartBuilder {
+public class LinechartBuilder  implements ChartBuilder{
 
     ArrayList<XYChart.Series<String, Number>> series = new ArrayList<>();
 
@@ -14,19 +15,21 @@ public class LinechartBuilder implements ChartBuilder {
     String yAxisTitle;
 
 
-    @Override
-    public void setTitle(String title) {
 
+
+    @Override
+    public void setTitle(String Title) {
+        title = Title;
     }
 
     @Override
-    public void setXAxisTitle(String xAxisTitle) {
-
+    public void setXAxisTitle(String XAxisTitle) {
+        xAxisTitle = XAxisTitle;
     }
 
     @Override
-    public void setYAxisTitle(String yAxisTitle) {
-
+    public void setYAxisTitle(String YAxisTitle) {
+        yAxisTitle = YAxisTitle;
     }
 
     @Override

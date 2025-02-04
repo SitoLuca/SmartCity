@@ -1,24 +1,24 @@
-/* Stile per il LineChart */
+
 .line-chart {
     -fx-background-color: white;
     -fx-border-color: green;
     -fx-border-width: 2px;
 }
 
-/* Stile per la linea del grafico */
+
 .default-color0.chart-series-line {
     -fx-stroke: green;
     -fx-stroke-width: 2px;
 }
 
-/* Stile per i punti del grafico */
+
 .default-color0.chart-line-symbol {
     -fx-background-color: green, white;
     -fx-background-insets: 0, 2;
     -fx-padding: 5px;
 }
 
-/* Stile per il DatePicker */
+
 .date-picker {
     -fx-background-color: white;
     -fx-border-color: green;
@@ -26,7 +26,7 @@
     -fx-text-fill: green;
 }
 
-/* Stile per il popup del DatePicker */
+
 .date-picker-popup .month-year-pane {
     -fx-background-color: green;
     -fx-text-fill: white;
@@ -47,7 +47,7 @@
     -fx-text-fill: white;
 }
 
-/* Stile base della CheckBox */
+
 .check-box {
     -fx-background-color: transparent;
     -fx-border-color: #4CAF50;
@@ -60,25 +60,24 @@
     -fx-transition: all 0.3s ease-in-out;
 }
 
-/* Stile al passaggio del mouse */
+
 .check-box:hover {
     -fx-border-color: #45a049;
     -fx-text-fill: #45a049;
 }
 
-/* Quando la CheckBox è selezionata */
 .check-box:selected {
     -fx-background-color: #4CAF50;
     -fx-text-fill: white;
     -fx-border-color: #388E3C;
 }
 
-/* Quando la CheckBox è selezionata e il mouse è sopra */
+
 .check-box:selected:hover {
     -fx-background-color: #388E3C;
 }
 
-/* Personalizzazione del box di spunta */
+
 .check-box .box {
     -fx-background-color: white;
     -fx-border-color: #4CAF50;
