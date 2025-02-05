@@ -16,6 +16,10 @@ public class Main extends Application {
         return primaryStage;
     }
 
+    /**
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage; //Salva lo Stage principale
@@ -30,6 +34,9 @@ public class Main extends Application {
 
     }
 
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
