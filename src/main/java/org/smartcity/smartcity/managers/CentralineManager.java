@@ -2,7 +2,6 @@ package org.smartcity.smartcity.managers;
 
 import org.smartcity.smartcity.Centralin;
 import org.smartcity.smartcity.enums.Codice;
-import org.smartcity.smartcity.enums.Status;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class CentralineManager {
 
     public void activateAll() {
         for (Centralin centralin : Centraline) {
-            centralin.setStatus(Status.online);
+            centralin.setStatus("online");
         }
     }
 
@@ -57,15 +56,16 @@ public class CentralineManager {
     public void detectall() throws SQLException {
         for (Centralin centralin : Centraline) {
             Map<String, Float> ris = centralin.detect();
-
-            if (countCriticParams(ris) <= 1) {
-                centralin.setCodice(Codice.Verde);
-            }
-            if (countCriticParams(ris) == 2) {
-                centralin.setCodice(Codice.Giallo);
-            }
-            if (countCriticParams(ris) == 3) {
-                centralin.setCodice(Codice.Rosso);
+            if (ris != null) {
+                if (countCriticParams(ris) <= 1) {
+                    centralin.setCodice(Codice.Verde);
+                }
+                if (countCriticParams(ris) == 2) {
+                    centralin.setCodice(Codice.Giallo);
+                }
+                if (countCriticParams(ris) == 3) {
+                    centralin.setCodice(Codice.Rosso);
+                }
             }
 
         }

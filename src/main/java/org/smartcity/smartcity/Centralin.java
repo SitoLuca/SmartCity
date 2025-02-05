@@ -1,20 +1,19 @@
 package org.smartcity.smartcity;
 
-import org.smartcity.smartcity.dbProxy.DbManagerProxy;
+import org.smartcity.smartcity.State.OfflineState;
+import org.smartcity.smartcity.State.OnlineState;
+import org.smartcity.smartcity.State.State;
 import org.smartcity.smartcity.enums.Codice;
-import org.smartcity.smartcity.enums.Status;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * The Centralin class represents a central unit that manages sensors for a smart city.
  * It holds information about the central unit's identity, position, status, and sensor readings.
  * The class is responsible for managing the state of the central unit, updating its status and code,
  * and detecting environmental parameters like pollution, temperature, and vehicle count when online.
- *
+ * <p>
  * Responsibilities:
  * - Maintain the central unit's identity (id), name, position, status, and associated code.
  * - Manage the unit's online/offline status.
@@ -27,12 +26,13 @@ public class Centralin {
     private final int id; //Centraline unique id
     private final String name; //Name of centraline
     private final String position; //Position of centraline
-    private Status status; //Status of centraline (Online, Offline)
+    private State status; //Status of centraline (Online, Offline)
     private Codice codice; //Code of centraline (Green,Yellow, red)
 
 
     /**
      * Class Builder
+     *
      * @param name
      * @param position
      * @param Id
@@ -41,12 +41,13 @@ public class Centralin {
         id = Id;
         this.name = name;
         this.position = position;
-        status = Status.offline;
+        status = new OfflineState();
         codice = Codice.Unknown;
     }
 
     /**
      * Getter name
+     *
      * @return name
      */
     public String getName() {
@@ -56,6 +57,7 @@ public class Centralin {
 
     /**
      * Getter position
+     *
      * @return position
      */
     public String getPosition() {
@@ -64,13 +66,16 @@ public class Centralin {
 
     /**
      * Getter status
+     *
      * @return status
      */
     public String getStatus() {
         return status.toString();
     }
+
     /**
      * Getter id
+     *
      * @return id
      */
     public int getId() {
@@ -79,6 +84,7 @@ public class Centralin {
 
     /**
      * Getter codice
+     *
      * @return codice
      */
     public String getCodice() {
@@ -87,14 +93,21 @@ public class Centralin {
 
     /**
      * Setter status
+     *
      * @return status
      */
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(String status) {
+        if (status.equals("offline")) {
+            this.status = new OfflineState();
+        }
+        if (status.equals("online")) {
+            this.status = new OnlineState();
+        }
     }
 
     /**
      * Setter codice
+     *
      * @return codice
      */
     public void setCodice(Codice codice) {
@@ -111,30 +124,8 @@ public class Centralin {
      */
     public Map<String, Float> detect() throws SQLException {
 
-        if (status == Status.offline) {
-            System.out.println("Device offline");
-        } else {
-            DbManagerProxy manager = new DbManagerProxy();
+        return status.doaction(this.id);
 
-            float inquinamento = Math.abs(ThreadLocalRandom.current().nextInt() % 100); //Generate Numbers
-            float temperatura = Math.abs(ThreadLocalRandom.current().nextInt() % 40);
-            float n_vec = Math.abs(ThreadLocalRandom.current().nextInt() % 50);
-
-            String sql = "insert into log_sensore (inquinamento, temperatura, n_veicoli, id_sensore) values (" + inquinamento + "," + temperatura + "," + n_vec + "," + this.id + ")";
-            manager.insert(sql);
-
-            Map<String, Float> params = new HashMap<String, Float>();
-
-            params.put("Temperatura", temperatura); //Build the hash map with detections
-            params.put("N_Veicoli", n_vec);
-            params.put("inquinamento", inquinamento);
-
-            return params;
-
-
-        }
-
-        return null;
     }
 
 }

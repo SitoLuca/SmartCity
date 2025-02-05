@@ -239,8 +239,8 @@ public class DashboardController extends Controller {
         Tabledata.clear();
 
         MatrixSensor.getColumns().add(createColumn("Id", "id"));
-        MatrixSensor.getColumns().add(createColumn("Nome", "nome"));
-        MatrixSensor.getColumns().add(createColumn("Posizione", "posizione"));
+        MatrixSensor.getColumns().add(createColumn("Nome", "name"));
+        MatrixSensor.getColumns().add(createColumn("Posizione", "position"));
         MatrixSensor.getColumns().add(createColumn("Status", "status"));
 
         MatrixSensor.getColumns().add(createColumn("Codice", "codice"));
