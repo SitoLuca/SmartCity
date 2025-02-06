@@ -1,8 +1,10 @@
 package org.smartcity.smartcity;
 
+import org.smartcity.smartcity.State.OfflineState;
+import org.smartcity.smartcity.State.OnlineState;
+import org.smartcity.smartcity.State.State;
 import org.smartcity.smartcity.dbProxy.DbManagerProxy;
 import org.smartcity.smartcity.enums.Codice;
-import org.smartcity.smartcity.enums.Status;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -14,11 +16,11 @@ import java.util.concurrent.ThreadLocalRandom;
  * Ogni centralina ha un identificativo, un nome, una posizione e una variabile statis che rappresenta il suo stato attuale.
  */
 public class Centralin {
-    private final int id;
-    private final String name;
-    private final String posizione;
-    private Status status;
-    private Codice codice;
+    private final int id; //Centraline unique id
+    private final String name; //Name of centraline
+    private final String position; //Position of centraline
+    private State status; //Status of centraline (Online, Offline)
+    private Codice codice; //Code of centraline (Green,Yellow, red)
 
     /**
      * Costruttore della classe Centralin.
@@ -30,8 +32,8 @@ public class Centralin {
     public Centralin(String name, String Posizione, int Id) {
         id = Id;
         this.name = name;
-        posizione = Posizione;
-        status = Status.offline;
+        position = Posizione;
+        status = new OfflineState();
         codice = Codice.Unknown;
     }
 
@@ -49,8 +51,8 @@ public class Centralin {
      *
      * @return Posizione della centralina.
      */
-    public String getPosizione() {
-        return posizione;
+    public String getPosition() {
+        return position;
     }
 
     /**
@@ -85,8 +87,13 @@ public class Centralin {
      *
      * @param status Nuovo stato della centralina.
      */
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(String status) {
+        if (status.equals("offline")) {
+            this.status = new OfflineState();
+        }
+        if (status.equals("online")) {
+            this.status = new OnlineState();
+        }
     }
 
     /**
@@ -107,26 +114,6 @@ public class Centralin {
      */
     public Map<String, Float> detect() throws SQLException {
 
-        if (status == Status.offline) {
-            System.out.println("Dispositivo offline");
-        } else {
-            DbManagerProxy manager = new DbManagerProxy();
-
-            float inquinamento = Math.abs(ThreadLocalRandom.current().nextInt() % 100);
-            float temperatura = Math.abs(ThreadLocalRandom.current().nextInt() % 40);
-            float n_vec = Math.abs(ThreadLocalRandom.current().nextInt() % 50);
-
-            String sql = "INSERT INTO log_sensore (inquinamento, temperatura, n_veicoli, id_sensore) VALUES (" +
-                    inquinamento + ", " + temperatura + ", " + n_vec + ", " + this.id + ")";
-            manager.insert(sql);
-
-            Map<String, Float> params = new HashMap<>();
-            params.put("Temperatura", temperatura);
-            params.put("N_Veicoli", n_vec);
-            params.put("Inquinamento", inquinamento);
-
-            return params;
-        }
-        return null;
+        return status.doaction(this.id);
     }
 }

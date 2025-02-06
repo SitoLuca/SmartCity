@@ -2,7 +2,6 @@ package org.smartcity.smartcity.managers;
 
 import org.smartcity.smartcity.Centralin;
 import org.smartcity.smartcity.enums.Codice;
-import org.smartcity.smartcity.enums.Status;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -87,7 +86,7 @@ public class CentralineManager {
      */
     public void activateAll() {
         for (Centralin centralin : Centraline) {
-            centralin.setStatus(Status.online);
+            centralin.setStatus("online");
         }
     }
 
