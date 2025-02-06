@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -16,6 +18,7 @@ import org.smartcity.smartcity.Main;
 import org.smartcity.smartcity.dbProxy.DbManagerProxy;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +26,11 @@ import java.util.Map;
 /**
  * Controller per la gestione della visualizzazione del grafico.
  * Estende la classe {@link Application}.
- *
+ * <p>
  * Questa classe gestisce la logica di creazione di un grafico a linee basato su
  * i dati ottenuti dal database, con possibilità di selezionare il periodo di tempo
  * e i dati da visualizzare tramite delle checkbox.
+ * </p>
  */
 public class PlotController extends Application {
 
@@ -48,7 +52,7 @@ public class PlotController extends Application {
     private final CategoryAxis xAxis = new CategoryAxis(); // Asse delle ascisse (per le date)
     private final NumberAxis yAxis = new NumberAxis(); // Asse delle ordinate (per i valori)
 
-    LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+    LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
 
     /**
      * Costruttore della classe {@link PlotController}.
@@ -114,9 +118,42 @@ public class PlotController extends Application {
      * Metodo per disegnare il grafico a linee basato sui dati selezionati nel periodo
      * specificato.
      *
+     * Viene visualizzato un alert di errore se la data d'inizio è maggiore di quella odierna
+     * oppure se la data d'inizio maggiore della data di fine
+     *
      * @throws SQLException Se si verifica un errore durante l'esecuzione della query SQL.
      */
     private void DrawLineChart() throws SQLException {
+        // Verifica che entrambe le date siano state selezionate
+        if (dateFrom.getValue() == null || DateTo.getValue() == null) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Errore di selezione data");
+            alert.setHeaderText("Date non valide");
+            alert.setContentText("Assicurarsi di aver selezionato sia la data di inizio che quella di fine.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Verifica che la data di inizio non sia successiva alla data di fine.
+        if (dateFrom.getValue().isAfter(DateTo.getValue())) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Errore di selezione data");
+            alert.setHeaderText("Periodo di tempo non valido");
+            alert.setContentText("La data di inizio non può essere successiva alla data di fine.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Confronta la data di inizio con la data odierna.
+        LocalDate today = LocalDate.now();
+        if (dateFrom.getValue().isAfter(today)) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Errore di selezione data");
+            alert.setHeaderText("Data di inizio non valida");
+            alert.setContentText("La data di inizio non può essere successiva alla data odierna.");
+            alert.showAndWait();
+            return;
+        }
 
         DbManagerProxy db = new DbManagerProxy(); // Oggetto per interagire con il database
 
@@ -154,20 +191,20 @@ public class PlotController extends Application {
         }
 
         // Lista delle serie da aggiungere al grafico in base alle checkbox selezionate
-        List<XYChart.Series<String, Number>> a = new ArrayList<>();
+        List<XYChart.Series<String, Number>> seriesList = new ArrayList<>();
 
         if (CheckTemperatura.isSelected()) {
-            a.add(tempSeries);
+            seriesList.add(tempSeries);
         }
         if (CheckVeicoli.isSelected()) {
-            a.add(veicoliSeries);
+            seriesList.add(veicoliSeries);
         }
         if (CheckInquinamento.isSelected()) {
-            a.add(inquinamentoSeries);
+            seriesList.add(inquinamentoSeries);
         }
 
         // Aggiunge le serie selezionate al grafico
-        lineChart.getData().addAll(a);
+        lineChart.getData().addAll(seriesList);
 
         // Imposta la dimensione del grafico
         lineChart.setMinHeight(ChartPane.getHeight());
