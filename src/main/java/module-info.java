@@ -26,6 +26,4 @@ module org.smartcity.smartcity {
     opens org.smartcity.smartcity.enums to javafx.fxml;
     exports org.smartcity.smartcity.dbProxy;
     opens org.smartcity.smartcity.dbProxy to javafx.fxml;
-    exports org.smartcity.smartcity.builder;
-    opens org.smartcity.smartcity.builder to javafx.fxml;
 }
